@@ -13,9 +13,10 @@ example.
 
 #include "inverseMatrix.h"
 #include "quartic.h"
+#include "helperFunctions.h"
 #include <stdio.h>
 
-int main() {
+void gaussNewton() {
 
 	//Define the data set
 	double xVals[5] = { -0.024,-0.014,0,0.009,0.021 };
@@ -38,7 +39,7 @@ int main() {
 
 	//Get the Jacobian - this only has to be once due to the form of a quartic jacobian
 	double jac[5][5];
-	fillJacobian(xVals, jac);
+	fillQuarticJacobian(xVals, jac);
 
 	//Inverse the Jacobian
 	getInverse(jac);
@@ -55,7 +56,7 @@ int main() {
 	for (int iter = 0; iter < n_iter; iter++) {
 
 		//Determine the residual vector 
-		getResiduals(resVec, xVals, yVals, bVec);
+		getQuarticResiduals(resVec, xVals, yVals, bVec);
 
 		//Determine the sumSquares value
 		sumSquares = sumSq(resVec);
@@ -64,7 +65,7 @@ int main() {
 		fprintf(outfile, "Sum squared of res is: %f\n", sumSquares);
 		
 		//Increment the parameters
-		incParams(bVec,jac,resVec);
+		incQuarticParams(bVec,jac,resVec);
 	
 		fprintf(outfile, "Incremented parameters are:\n");
 		fprintf(outfile, "b1 = %f\n",bVec[0]);

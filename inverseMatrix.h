@@ -1,3 +1,3 @@
 #pragma once
 
-void getInverse(double mat[5][5]);
+void getInverse(double mat[4][4]);

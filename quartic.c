@@ -1,3 +1,5 @@
+//Quartic implementation
+
 #include "quartic.h"
 #include "math.h"
 
@@ -9,7 +11,7 @@ double quartic(double x,
 }
 
 //Fill the jacobian 
-void fillJacobian(double xVals[5], double jac[5][5]){
+void fillQuarticJacobian(double xVals[5], double jac[5][5]){
 	for (int row = 0; row < 5; row++) {
 		for (int col = 0; col < 5; col++) {
 			double xpow = pow(xVals[col],row);
@@ -18,24 +20,15 @@ void fillJacobian(double xVals[5], double jac[5][5]){
 	}
 }
 
-//Determine the loss function
-double sumSq(double res[5]) {
-	double sum = 0;
-	for (int i = 0; i < 5; i++) {
-		sum += res[i] * res[i];
-	}
-	return sum;
-}
-
 //Fill the residual vector 
-void getResiduals(double resVec[5], double xVals[5], double yVals[5], double bVals[5]) {
+void getQuarticResiduals(double resVec[5], double xVals[5], double yVals[5], double bVals[5]) {
 	for (int i = 0; i < 5; i++) {
 		resVec[i] = yVals[i] - quartic(xVals[i], bVals);
 	}
 }
 
-//Increment the parameters
-void incParams(double bVals[5], double jac[5][5], double resVec[5]) {
+//Increment the parameters using the Gauss-Newton approach where jac = inverse jacobian
+void incQuarticParams(double bVals[5], double jac[5][5], double resVec[5]) {
 
 	//For each vector value
 	for (int i = 0; i < 5; i++) {
@@ -49,7 +42,9 @@ void incParams(double bVals[5], double jac[5][5], double resVec[5]) {
 		}
 
 		//Learning rate to slow down the step in parameter space
-		double eta = 0.2;
+		//(This was for pedagogical reasons and really is more like
+		//the Levenberg-Marqaudt algorithm
+		double eta = 1.0;
 
 		bVals[i] = bVals[i] + eta*jacSum;
 	}

@@ -111,11 +111,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="gaussian.c" />
     <ClCompile Include="gaussNewtonFit.c" />
+    <ClCompile Include="helperFunctions.c" />
     <ClCompile Include="inverseMatrix.c" />
+    <ClCompile Include="levenbergMarquardtFit.c" />
     <ClCompile Include="quartic.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="gaussian.h" />
+    <ClInclude Include="helperFunctions.h" />
     <ClInclude Include="inverseMatrix.h" />
     <ClInclude Include="quartic.h" />
   </ItemGroup>

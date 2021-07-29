@@ -3,11 +3,11 @@
 #include <stdio.h>
 #include "inverseMatrix.h"
 
-void getInverse(double mat[5][5]) {
+void getInverse(double mat[4][4]) {
 
 	//Create augmented matrix
-	int order = 5;
-	double augmat[5][10];
+	int order = 4;
+	double augmat[4][8];
 
 	int row = 0, column = 0;
 
