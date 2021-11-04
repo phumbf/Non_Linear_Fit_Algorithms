@@ -84,7 +84,7 @@ void levenberg(double jac[5][4], double leven[4][4], double lambda){
 			leven[i][j] = 0;
 
 			for(int k=0; k<5; k++){
-				leven[i][j] += jacTr[i][k] + jac[k][j];
+				leven[i][j] += jacTr[i][k] * jac[k][j];
 			}
 
 			//Add the identity matrix * lambda factor

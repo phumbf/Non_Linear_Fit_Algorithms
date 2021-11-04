@@ -13,3 +13,5 @@ At the moment the example still uses a simple 5 data point fit and iterates a fi
 to stop iterating once an appropriate objective function value has been reached. 
 
 The Jacobian here is non-square meaning that additional linear algebra is implemented using both the Jacobian and Jacobian transpose
+
+3) kernel.cu - A quick, initial implementation of the Levenberg-Marquadt fit using a GPU to increase speed. This does increase performance (can perform around 100,000 fits in under 10 seconds), but additional work could still improve this dramatically.
